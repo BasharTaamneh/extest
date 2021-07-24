@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+        integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>301 exam</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>301 exam</h1>
+    </header>
+
+    <main>
+        <div id="tablecontainer">
+            <table id="mytable">
+                <tfoot id="table-footer">
+
+                </tfoot>
+            </table>
+        </div>
+
+        <div id="formcontainer">
+            <form id="myform">
+                <legend><h2>orders list</h2></legend><br>
+
+            <fieldset>
+                    <label for="clinput">Client Name</label>
+                    <input type="text" maxlength="24" name="clinput" id="clinput" required><br><br>
+
+                    <label for="clAddress">Client Address</label>
+                    <input type="text" maxlength="36" name="clAddress" id="clAddress" required><br><br>
+
+                    <label for="clmail">males</label>
+                    <select name="clmail" id="clmail" required>
+                        <option value=""></option>
+                        <option value="mansaf">mansaf</option>
+                        <option value="shawerma">shawerma</option>
+                        <option value="maqlowbaa">maqlowbaa</option>
+                        <option value="mowsakhan">mowsakhan</option>
+                        <option value="kabseh">kabseh</option>
+                        <option value="barbique">barbique</option>
+
+                    </select><br><br>
+
+                    <label for="clQuntity">Quntity</label>
+                    <input type="number" name="clQuntity" id="clQuntity" min="1" max="100" step="number" required><br><br>
+
+                    <input type="submit" id="submit">
+
+                </fieldset>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            &COPY;bashar taamneh
+        </p>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
