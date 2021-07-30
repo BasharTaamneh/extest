@@ -9,6 +9,8 @@ header{
     text-align: center;
     font-size: 3ch;
     font-weight: bolder;
+    width: 100%;
+
 }
 footer{
     background-color: bisque;
@@ -18,6 +20,7 @@ footer{
     font-weight: bolder;
     height: 20ch;
     margin-top: 5ch;
+    width: 100%;
 }
 main{
     height: 100%;
@@ -25,12 +28,11 @@ main{
 }
 #mytable{
     display: inline-table;
-    border: 0.1ch solid black;
     margin-left: 60ch;
     margin-top: 2ch;
 }
 #mytable td{
-    border: 0.2ch double black;
+    border: 0.4ch double black;
     text-align: center;
     font-size: 2.2ch;
     padding: 1ch;

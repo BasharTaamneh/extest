@@ -40,12 +40,12 @@ tableheadrender();
 
 let orders = [];
 
-function clorders(ClientName, ClientNumber, ClientAddres, OrderdMales, Price, Quntity, Totalprice) {
+function clorders(ClientName, ClientNumber, ClientAddres, OrderdMales,Price, Quntity, Totalprice) {
     this.ClientName = ClientName;
     this.ClientNumber = ClientNumber;
     this.ClientAddres = ClientAddres;
     this.OrderdMales = OrderdMales;
-    this.Price = Price;
+    this.Price=Price;
     this.Quntity = Quntity;
     this.Totalprice = Totalprice;
     orders.push(this);
@@ -54,10 +54,10 @@ function clorders(ClientName, ClientNumber, ClientAddres, OrderdMales, Price, Qu
 
 clorders.prototype.ClientNumbercalc = function () {
     if (this.ClientNumber == undefined) {
-        return this.ClientNumber = 'client0'
+        return this.ClientNumber = 'client 0'
     } else {
         for (let i = 0; i < orders.length; i++) {
-            return this.ClientNumber = `client${orders.length}`;
+            return this.ClientNumber = "client " + orders.length;
         }
     }
 }
@@ -68,74 +68,86 @@ clorders.prototype.Pricecalc = function () {
 
 
 
+function neworder(event) {
+    event.preventDefault();
+    let Name = event.target.clinput.value;
+    let Number = clorders.prototype.ClientNumbercalc();
+    let Addres = event.target.clAddress.value;
+    let Males = event.target.clmail.value;
+    let MPrice = clorders.prototype.Pricecalc();
+    let MQuntity = event.target.clQuntity.value;
+    let MTotalprice = MPrice * MQuntity;
+    new clorders(Name, Number, Addres, Males, MPrice, MQuntity, MTotalprice);
+    savToLocStor();
+    tablefootrender();
+    form.reset();
+    console.log(orders);
+}
 
-    function neworder(event) {
-        event.preventDefault();
-        let Name = event.target.clinput.value;
-        let Number = clorders.prototype.ClientNumbercalc();
-        let Addres = event.target.clAddress.value;
-        let Males = event.target.clmail.value;
-        let MPrice = clorders.prototype.Pricecalc();
-        let MQuntity = event.target.clQuntity.value;
-        let MTotalprice = MPrice * MQuntity;
-        new clorders(Name, Number, Addres, Males, MPrice, MQuntity, MTotalprice);
+form.addEventListener('submit', neworder);
+
+function tablefootrender() {
+    let tot = 0;
+    tablefooter.textContent = '';
+
+    for (let i = 0; i < orders.length; i++) {
+
+        let trElment = document.createElement('tr');
+        tdElment = document.createElement('td');
+        tdElment.textContent = orders[i].ClientName;
+        trElment.append(tdElment);
+
+        tdElment = document.createElement('td');
+        tdElment.textContent = orders[i].ClientNumber;
+        trElment.append(tdElment);
+
+        tdElment = document.createElement('td');
+        tdElment.textContent = orders[i].ClientAddres;
+        trElment.append(tdElment);
+
+        tdElment = document.createElement('td');
+        tdElment.textContent = orders[i].OrderdMales;
+        trElment.append(tdElment);
+
+        tdElment = document.createElement('td');
+        tdElment.textContent = orders[i].Price + '.00 JOD';
+        trElment.append(tdElment);
+
+        tdElment = document.createElement('td');
+        tdElment.textContent = orders[i].Quntity;
+        trElment.append(tdElment);
+
+        tdElment = document.createElement('td');
+        tdElment.textContent = orders[i].Totalprice + '.00 JOD';
+        trElment.append(tdElment);
+        tablefooter.append(trElment);
+
+        tot += orders[i].Totalprice;
+
+    }
+    let trElment2 = document.createElement('tr');
+    tdElment = document.createElement('td');
+    tdElment.textContent = 'Grandtotal Price:';
+    trElment2.append(tdElment);
+
+    tdElment = document.createElement('td');
+    tdElment.textContent = tot + '.00 JOD';
+    trElment2.append(tdElment);
+
+    tablefooter.append(trElment2);
+}
+
+
+function savToLocStor() {
+    let data = JSON.stringify(orders);
+    localStorage.setItem('clorder', data);
+}
+function ReadLocStor() {
+    let getclorderstring = localStorage.getItem('clorder');
+    let getclorder = JSON.parse(getclorderstring);
+    if (getclorder !== null) {
+        orders = getclorder;
         tablefootrender();
-        savToLocStor();
-        console.log(orders);
-        form.reset();
     }
-
-    form.addEventListener('submit', neworder);
-
-    function tablefootrender() {
-
-        tablefooter.textContent = '';
-
-        for (let i = 0; i < orders.length; i++) {
-
-            let trElment = document.createElement('tr');
-            tdElment = document.createElement('td');
-            tdElment.textContent = orders[i].ClientName;
-            trElment.append(tdElment);
-
-            tdElment = document.createElement('td');
-            tdElment.textContent = orders[i].ClientNumber;
-            trElment.append(tdElment);
-
-            tdElment = document.createElement('td');
-            tdElment.textContent = orders[i].ClientAddres;
-            trElment.append(tdElment);
-
-            tdElment = document.createElement('td');
-            tdElment.textContent = orders[i].OrderdMales;
-            trElment.append(tdElment);
-
-            tdElment = document.createElement('td');
-            tdElment.textContent = orders[i].Price + '.00 JOD';
-            trElment.append(tdElment);
-
-            tdElment = document.createElement('td');
-            tdElment.textContent = orders[i].Quntity;
-            trElment.append(tdElment);
-
-            tdElment = document.createElement('td');
-            tdElment.textContent = orders[i].Totalprice + '.00 JOD';
-            trElment.append(tdElment);
-
-            tablefooter.append(trElment);
-
-        }
-    }
-    function savToLocStor() {
-        let data = JSON.stringify(orders);
-        localStorage.setItem('clorder', data);
-    }
-    function ReadLocStor() {
-        let getclorderstring = localStorage.getItem('clorder');
-        let getclorder = JSON.parse(getclorderstring);
-        if (getclorder !== null) {
-            orders = getclorder;
-            tablefootrender();
-        }
-    }
-    ReadLocStor();
+}
+ReadLocStor();
